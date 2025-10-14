@@ -16,6 +16,7 @@ const cogerDatosFormulario = (req, messageType) => {
     const username = sessionUser.username;
     const user = { name: username };
     
+    
     let htmlMessage = '';
 
     if (messageType === 'list') {
