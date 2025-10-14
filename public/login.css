@@ -1,0 +1,122 @@
+@media (max-width: 768px) {
+
+    /* Per a pantalles petites */
+    .form-container h2 {
+        font-size: 1.2em;
+        /* Redueix la mida de la lletra */
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        /* Assegura't que els labels es mostren */
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 100%;
+        /* Inputs ocupen tot l'ample del contenidor */
+    }
+}
+
+/* Estils globals */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+/* Estils per als formularis */
+.form-container {
+    margin-bottom: 20px;
+    height: 295px;
+}
+
+label {
+    display: block;
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+span {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Botó de tancar sessió */
+#close-session {
+    background-color: #dc3545;
+}
+
+#close-session:hover {
+    background-color: #a71d2a;
+}
+
+/* Missatges d'estat */
+#login-form span,
+#register-form span {
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+#login-form span.success,
+#register-form span.success {
+    color: green;
+}
+
+#login-form span.error,
+#register-form span.error {
+    color: red;
+}

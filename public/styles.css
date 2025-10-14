@@ -1,0 +1,91 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+p {
+    color:black;
+}
+header h1 {
+    margin: 0;
+}
+
+/* Main content */
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Llistat amb estil pijama */
+.product-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.product-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-item:nth-child(odd) {
+    background-color: #f4f4f4; /* Color per a les línies imparells */
+}
+
+.product-item:nth-child(even) {
+    background-color: #e8e8e8; /* Color per a les línies parells */
+}
+
+
+/* Form */
+.product-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.product-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.product-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.product-form button {
+    background-color: #0078d7;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product-form button:hover {
+    background-color: #005bb5;
+}
