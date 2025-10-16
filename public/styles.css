@@ -89,3 +89,7 @@ main {
 .pokemon-form button:hover {
     background-color: #005bb5;
 }
+#imgPokemon{
+    width: 130px;
+    height: 170px;
+}
