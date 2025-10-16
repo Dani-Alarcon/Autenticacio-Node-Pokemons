@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nou Pokémon</title>
+    <link rel="stylesheet" href="/nou_css.css">
+</head>
+<body>
+    <header>
+        <h1>Crear Nou Pokémon</h1>
+        <a href="/pokemons">Tornar al llistat</a>
+    </header>
+    
+    <main>
+        <form action="/pokemons/createPokemon" method="POST">
+            
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="type">Tipus:</label>
+            <input type="text" id="type" name="type" required>
+
+            <label for="generation">Generació:</label>
+            <input type="number" id="generation" name="generation" step="1" required>
+
+            <label for="imatge">Imatge (URL opcional):</label>
+            <input type="text" id="imatge" name="imatge">
+
+            <button type="submit">Crear Pokémon</button>
+        </form>
+    </main>
+</body>
+</html>

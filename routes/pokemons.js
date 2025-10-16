@@ -49,6 +49,10 @@ router.get('/editPokemon/:id', autenticacio, (req, res) => {
     res.render("edit_pokemon", { user, pokemon, htmlMessage });
 });
 
+router.get('/create', autenticacio, (req, res) => {
+    res.render("create_pokemon"); 
+});
+
 router.get('/:id', autenticacio, (req, res) => {
     const { user, htmlMessage } = cogerDatosFormulario(req, 'detail');
 
@@ -59,14 +63,24 @@ router.get('/:id', autenticacio, (req, res) => {
     res.render("pokemon", { user, pokemon, htmlMessage });
 });
 
-router.post('/', autenticacio, (req, res) => {
+router.post('/createPokemon/', autenticacio, (req, res) => {
     const data = readData();
-    const { name, type, generation } = req.body;
-    if (!name || !type || !generation) return res.status(400).send('All fields are required');
-    const newPokemon = { id: data.pokemons.length + 1, name, type, generation };
+    const { name, type, generation, imatge } = req.body; 
+    
+    if (!name || !type || !generation) return res.status(400).send('Falten camps obligatoris');
+    
+    const newPokemon = { 
+        id: data.pokemons.length + 1, 
+        name, 
+        type, 
+        generation,
+        imatge: imatge || 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png' // poner imagen por defecto
+    };
+    
     data.pokemons.push(newPokemon);
     writeData(data);
     res.json(newPokemon);
+    res.redirect('/pokemons');
 });
 
 router.put('/:id', autenticacio, (req, res) => {
@@ -76,7 +90,7 @@ router.put('/:id', autenticacio, (req, res) => {
 
     if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
 
-    data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };
+    data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };//copia la informacion que hay en el formulario con req.body y la mete en la base de datos
     writeData(data);
     //res.json({ message: 'Pokemon updated successfully' });
     res.redirect('/pokemons');
