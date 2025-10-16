@@ -10,85 +10,90 @@ const writeData = (data) => fs.writeFileSync('./db/db.json', JSON.stringify(data
 const cogerDatosFormulario = (req, messageType) => {
     const sessionUser = req.session.user;//Coge los datos de la sesion del formulario(se guardan ahi en el middleware del server.js)
     if (!sessionUser || !sessionUser.username) {
-        return null; 
+        return null;
     }
-    
+
     const username = sessionUser.username;
     const user = { name: username };
-    
     let htmlMessage = '';
 
     if (messageType === 'list') {
         htmlMessage = `<a href="/">Home</a>`;
     } else if (messageType === 'detail' || messageType === 'edit') {
-        htmlMessage = `<a href="/products">Llistat de pokemons</a>`;
+        htmlMessage = `<a href="/pokemons">Llistat de pokemons</a>`;
     }
-    
     return { user, htmlMessage };
 };
 const autenticacio = (req, res, next) => {
     if (!req.session.user || !req.session.user.username) {
         // Redirecciona a l'arrel, que segons server.js, porta a la vista 'login'
-        return res.redirect('/'); 
+        return res.redirect('/');
     }
     next();
 };
 
-router.get('/', autenticacio,(req, res) => {
+router.get('/', autenticacio, (req, res) => {
     const { user, htmlMessage } = cogerDatosFormulario(req, 'list');
     const data = readData();
-    res.render("products", { user, data, htmlMessage });
+    
+    res.render("pokemons", { user, data, htmlMessage });
 });
 
-router.get('/editProducte/:id', autenticacio,(req, res) => {
+router.get('/editPokemon/:id', autenticacio, (req, res) => {
     const { user, htmlMessage } = cogerDatosFormulario(req, 'edit');
-    
-    const data = readData();
-    const product = data.products.find(p => p.id === parseInt(req.params.id));
-    
-    if (!product) return res.status(404).send('Product not found');
 
-    res.render("edit_product", { user, product, htmlMessage });
+    const data = readData();
+    
+    const pokemon = data.pokemons.find(p => p.id === parseInt(req.params.id));
+    if (!pokemon) return res.status(404).send('Pokemon not found');
+    res.render("edit_pokemon", { user, pokemon, htmlMessage });
 });
 
-router.get('/:id', autenticacio,(req, res) => {
+router.get('/:id', autenticacio, (req, res) => {
     const { user, htmlMessage } = cogerDatosFormulario(req, 'detail');
-    
+
     const data = readData();
-    const product = data.products.find(p => p.id === parseInt(req.params.id));
-    if (!product) return res.status(404).send('Product not found');
-    res.render("product", { user, product, htmlMessage });
+    const pokemon = data.pokemons.find(p => p.id === parseInt(req.params.id));
+    if (!pokemon) return res.status(404).send('Pokemon not found');
+
+    res.render("pokemon", { user, pokemon, htmlMessage });
 });
 
-router.post('/', autenticacio,(req, res) => {
+router.post('/', autenticacio, (req, res) => {
     const data = readData();
     const { name, type, generation } = req.body;
     if (!name || !type || !generation) return res.status(400).send('All fields are required');
-    const newProduct = { id: data.products.length + 1, name, type, generation };
-    data.products.push(newProduct);
+    const newPokemon = { id: data.pokemons.length + 1, name, type, generation };
+    data.pokemons.push(newPokemon);
     writeData(data);
-    res.json(newProduct);
+    res.json(newPokemon);
 });
 
 router.put('/:id', autenticacio, (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
-    const productIndex = data.products.findIndex(p => p.id === id);
-    if (productIndex === -1) return res.status(404).send('Product not found');
-    data.products[productIndex] = { ...data.products[productIndex], ...req.body };
+    const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
+
+    if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
+
+    data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };
     writeData(data);
-    //res.json({ message: 'Product updated successfully' });
-    res.redirect('/products');
+    //res.json({ message: 'Pokemon updated successfully' });
+    res.redirect('/pokemons');
 });
 
-router.delete('/:id', autenticacio,(req, res) => {
+router.delete('/:id', autenticacio, (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
-    const productIndex = data.products.findIndex(p => p.id === id);
-    if (productIndex === -1) return res.status(404).send('Product not found');
-    data.products.splice(productIndex, 1);
-    writeData(data);
-    res.json({ message: 'Product deleted successfully' });
-});
 
+    const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
+
+    if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
+
+
+    data.pokemons.splice(pokemonIndex, 1);
+    writeData(data);
+
+    res.json({ message: 'Pokemon deleted successfully' });
+});
 export default router;

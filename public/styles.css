@@ -31,13 +31,13 @@ main {
 }
 
 /* Llistat amb estil pijama */
-.product-list {
+.pokemon-list {
     list-style: none;
     padding: 0;
     margin: 20px 0;
 }
 
-.product-item {
+.pokemon-item {
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -46,30 +46,30 @@ main {
     align-items: center;
 }
 
-.product-item:nth-child(odd) {
+.pokemon-item:nth-child(odd) {
     background-color: #f4f4f4; /* Color per a les línies imparells */
 }
 
-.product-item:nth-child(even) {
+.pokemon-item:nth-child(even) {
     background-color: #e8e8e8; /* Color per a les línies parells */
 }
 
 
 /* Form */
-.product-form {
+.pokemon-form {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
     border: 1px solid #ddd;
 }
 
-.product-form label {
+.pokemon-form label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.product-form input {
+.pokemon-form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -77,7 +77,7 @@ main {
     border-radius: 5px;
 }
 
-.product-form button {
+.pokemon-form button {
     background-color: #0078d7;
     color: white;
     border: none;
@@ -86,6 +86,6 @@ main {
     cursor: pointer;
 }
 
-.product-form button:hover {
+.pokemon-form button:hover {
     background-color: #005bb5;
 }

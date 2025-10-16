@@ -1,5 +1,5 @@
 import express from 'express';
-import productRoutes from './routes/products.js';
+import pokemonRoutes from './routes/pokemons.js';
 import bookRoutes from './routes/books.js';
 import methodOverride from 'method-override';
 import {PORT, SECRET_JWT_KEY} from './config.js'
@@ -31,7 +31,7 @@ app.use((req,res,next)=>{
     next() 
 })
 
-app.use('/products', productRoutes);
+app.use('/pokemons', pokemonRoutes);
 app.use('/books', bookRoutes);
 
 app.get('/',(req,res)=>{
