@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benvingut</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
+
 <body>
     <header>
         <h1>Gestió de Pokemons per <%= user.name %>!</h1>
@@ -16,17 +18,26 @@
             <h2>Llista de Pokemons</h2>
             <span><a href="/pokemons/create">Afegir pokemon</a></span>
             <ul class="pokemon-list">
-                <% data.pokemons.forEach(pokemon => { %>
+                <% data.pokemons.forEach(pokemon=> { %>
                     <li class="pokemon-item">
-                        <strong><%= pokemon.name %></strong>
+                        <strong>
+                            <%= pokemon.name %>
+                        </strong>
                         <span>Tipus: <%= pokemon.type %></span>
                         <span>Generació: <%= pokemon.generation %></span>
                         <span><a href="/pokemons/<%=pokemon.id %>">Detall pokemon</a></span>
                         <span><a href="/pokemons/editPokemon/<%=pokemon.id %>">Editar pokemon</a></span>
+                        <form action="/pokemons/<%= pokemon.id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit"
+                                onclick="return confirm('Estàs segur que vols eliminar <%= pokemon.name %>?');">
+                                Eliminar
+                            </button>
+                        </form>
                     </li>
-                <% }) %>
+                    <% }) %>
             </ul>
         </section>
     </main>
 </body>
+
 </html>

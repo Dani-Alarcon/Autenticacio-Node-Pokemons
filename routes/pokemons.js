@@ -79,7 +79,6 @@ router.post('/createPokemon/', autenticacio, (req, res) => {
     
     data.pokemons.push(newPokemon);
     writeData(data);
-    res.json(newPokemon);
     res.redirect('/pokemons');
 });
 
@@ -92,7 +91,6 @@ router.put('/:id', autenticacio, (req, res) => {
 
     data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };//copia la informacion que hay en el formulario con req.body y la mete en la base de datos
     writeData(data);
-    //res.json({ message: 'Pokemon updated successfully' });
     res.redirect('/pokemons');
 });
 
@@ -108,6 +106,7 @@ router.delete('/:id', autenticacio, (req, res) => {
     data.pokemons.splice(pokemonIndex, 1);
     writeData(data);
 
-    res.json({ message: 'Pokemon deleted successfully' });
+
+    res.redirect('/pokemons');
 });
 export default router;
