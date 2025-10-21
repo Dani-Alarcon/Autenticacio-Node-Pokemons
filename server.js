@@ -1,6 +1,6 @@
 import express from 'express';
 import pokemonRoutes from './routes/pokemons.js';
-import bookRoutes from './routes/books.js';
+import consolesRoutes from './routes/consoles.js';
 import methodOverride from 'method-override';
 import {PORT, SECRET_JWT_KEY} from './config.js'
 import { UserRepository } from './user-repository.js';
@@ -32,7 +32,7 @@ app.use((req,res,next)=>{
 })
 
 app.use('/pokemons', pokemonRoutes);
-app.use('/books', bookRoutes);
+app.use('/consoles', consolesRoutes);
 
 app.get('/',(req,res)=>{
     const {user}=req.session

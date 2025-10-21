@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvingut</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Gestió de Consoles per <%= user.name %>!</h1>
+        <h2><%- htmlMessage %></h2>
+    </header>
+    <main>
+        <section>
+            <h2>Llista de Consoles</h2>
+            <span><a href="/consoles/create">Afegir consola</a></span>
+            <ul class="pokemon-list">
+                <% data.consoles.forEach(consola=> { %>
+                    <li class="pokemon-item">
+                        <strong>
+                            <%= consola.name %>
+                        </strong>
+                        <span>Any de llançament: <%= consola.year %></span>
+                        <span><a href="/consoles/<%=consola.id %>">Detall consola</a></span>
+                        <span><a href="/consoles/editConsola/<%=consola.id %>">Editar consola</a></span>
+                        <form action="/consoles/<%= consola.id %>?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit"
+                                onclick="return confirm('Estàs segur que vols eliminar <%= consola.name %>?');">
+                                Eliminar
+                            </button>
+                        </form>
+                    </li>
+                    <% }) %>
+            </ul>
+        </section>
+    </main>
+</body>
+
+</html>

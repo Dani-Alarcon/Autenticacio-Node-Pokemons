@@ -1,1 +1,46 @@
-{"pokemons":[{"id":1,"name":"Pikachu","type":"Electric","generation":"1","imatge":"https://pngimg.com/d/pokemon_PNG140.png"},{"id":2,"name":"Mudkip","type":"Water","generation":3,"imatge":"https://i.imgur.com/PKUzCOM.png"},{"id":3,"name":"Lucario","type":"Fighting/Steel","generation":4,"imatge":"https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d0/latest/20150621180604/Lucario.png/800px-Lucario.png"},{"id":4,"name":"Corviknight","type":"Flying/Steel","generation":8,"imatge":"https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/823.png"}],"books":[{"id":1,"name":"Los 7 hábitos de la gente altamente efectiva","author":"Stephen R. Covey","year":1989},{"id":2,"name":"Padre rico, padre pobre","author":"Robert Kiyosaki","year":1997}]}
+{
+    "pokemons": [
+        {
+            "id": 1,
+            "name": "Pikachu",
+            "type": "Electric",
+            "generation": "1",
+            "imatge": "https://pngimg.com/d/pokemon_PNG140.png"
+        },
+        {
+            "id": 2,
+            "name": "Mudkip",
+            "type": "Water",
+            "generation": 3,
+            "imatge": "https://i.imgur.com/PKUzCOM.png"
+        },
+        {
+            "id": 3,
+            "name": "Lucario",
+            "type": "Fighting/Steel",
+            "generation": 4,
+            "imatge": "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/d/d0/latest/20150621180604/Lucario.png/800px-Lucario.png"
+        },
+        {
+            "id": 4,
+            "name": "Corviknight",
+            "type": "Flying/Steel",
+            "generation": 8,
+            "imatge": "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/823.png"
+        }
+    ],
+    "consoles": [
+        {
+            "id": 1,
+            "name": "Nintendo Switch 2",
+            "year": 2025,
+            "imatge": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Nintendo_Switch_2-Spieleequipment_20250605.png" 
+        },
+        {
+            "id": 2,
+            "name": "PlayStation 5",
+            "year": 2020,
+            "imatge": "https://wallpapers.com/images/featured/ps5-console-png-ywbv2gv3gfw23o3w.jpg"
+        }
+    ]
+}
