@@ -66,6 +66,7 @@ router.get('/:id', autenticacio, (req, res) => {
 router.post('/createPokemon/', autenticacio, (req, res) => {
     const data = readData();
     const { name, type, generation, imatge } = req.body; 
+    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png'
     
     if (!name || !type || !generation) return res.status(400).send('Falten camps obligatoris');
     
@@ -74,7 +75,7 @@ router.post('/createPokemon/', autenticacio, (req, res) => {
         name, 
         type, 
         generation,
-        imatge: imatge || 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png' // poner imagen por defecto
+        imatge: imatge || imatgePerDefecte
     };
     
     data.pokemons.push(newPokemon);
@@ -85,10 +86,15 @@ router.post('/createPokemon/', autenticacio, (req, res) => {
 router.put('/:id', autenticacio, (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
+    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png'
     const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
+    const imatgeUsuari = req.body.imatge
 
     if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
 
+    if(imatgeUsuari == ''){
+        req.body.imatge = imatgePerDefecte
+    }
     data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };//copia la informacion que hay en el formulario con req.body y la mete en la base de datos
     writeData(data);
     res.redirect('/pokemons');
