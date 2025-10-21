@@ -1,6 +1,6 @@
-# ⚡ Autenticació i CRUD amb Node.js (Pokémons & Consoles)
+# Autenticació i CRUD amb Node.js (Pokémons & Consoles)
 
-Aquest projecte demostra una aplicació web bàsica construïda amb Express.js que gestiona dues entitats, **Pokémons** i **Consoles**, mitjançant operacions CRUD i un sistema d'autenticació basat en **JWT**.
+Aquesta web que gestiona **Pokémons** i **Consoles**, mitjançant operacions CRUD i un sistema d'autenticació basat en **JWT**.
 
 ---
 
