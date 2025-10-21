@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nova Consola</title>
+    <link rel="stylesheet" href="/nou_css.css">
+</head>
+<body>
+    <header>
+        <h1>Crear Nova Consola</h1>
+        <a href="/consoles">Tornar al llistat</a>
+    </header>
+    
+    <main>
+        <form action="/consoles/createConsola" method="POST">
+            
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="year">Any:</label>
+            <input type="text" id="year" name="year" required>
+
+            <label for="imatge">Imatge (URL opcional):</label>
+            <input type="text" id="imatge" name="imatge">
+
+            <button type="submit">Crear Consola</button>
+        </form>
+    </main>
+</body>
+</html>

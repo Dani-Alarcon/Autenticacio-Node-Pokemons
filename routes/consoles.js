@@ -66,9 +66,9 @@ router.get('/:id', autenticacio, (req, res) => {
 router.post('/createConsola/', autenticacio, (req, res) => {
     const data = readData();
     const { name, year, imatge } = req.body; 
-    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-consola-ball-art-pic-png-image_11751536.png'
+    const imatgePerDefecte = 'https://gameservice.com.mx/assets/consolas.png'
     
-    if (!name || !type || !generation) return res.status(400).send('Falten camps obligatoris');
+    if (!name || !year) return res.status(400).send('Falten camps obligatoris');
     
     const newConsola = { 
         id: data.consoles.length + 1, 
@@ -85,7 +85,7 @@ router.post('/createConsola/', autenticacio, (req, res) => {
 router.put('/:id', autenticacio, (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
-    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-consola-ball-art-pic-png-image_11751536.png'
+    const imatgePerDefecte = 'https://gameservice.com.mx/assets/consolas.png'
     const consolaIndex = data.consoles.findIndex(p => p.id === id);
     const imatgeUsuari = req.body.imatge
 

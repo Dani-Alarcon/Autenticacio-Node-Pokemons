@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvingut</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Gestió de Consoles per <%= user.name %>!</h1>
+        <h2><%- htmlMessage %></h2>
+    </header>
+    <main>
+        <section>
+            <h2>Detall del Consola</h2>
+            <ul class="pokemon-list">
+                
+                    <li class="pokemon-item">
+                        <strong><%= consola.name %></strong>
+                        <span>Any de llançament: <%= consola.year %></span>
+                        <img src="<%= consola.imatge %>" id="imgConsola">
+                    </li>
+                
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

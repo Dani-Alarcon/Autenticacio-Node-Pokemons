@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edita Consola</title>
+    <link rel="stylesheet" href="/nou_css.css">
+</head>
+<body>
+    <header>
+        <h1>Editar Consola: <%= consola.name %></h1>
+    </header>
+    
+    <main>
+        <form action="/consoles/<%= consola.id %>?_method=PUT" method="POST">
+            <label for="name">Nom:</label>
+            <input type="text" id="name" name="name" value="<%= consola.name %>" required>
+            
+            <label for="year">Any de llançament:</label>
+            <input type="text" id="year" name="year" value="<%= consola.year %>" required>
+
+            <label for="imatge">Imatge:</label>
+            <input type="text" id="imatge" name="imatge" value="<%= consola.imatge %>">
+
+            <button type="submit">Desar Canvis</button>
+        </form>
+        <a href="/consoles">Tornar al llistat</a>
+    </main>
+</body>
+</html>
