@@ -33,10 +33,15 @@ const autenticacio = (req, res, next) => {
 };
 
 router.get('/', autenticacio, (req, res) => {
-    const { user, htmlMessage } = cogerDatosFormulario(req, 'list');
     const data = readData();
-    
-    res.render("pokemons", { user, data, htmlMessage });
+
+    res.format({
+        json: () => res.json(data),
+        html: () => {
+            const { user, htmlMessage } = cogerDatosFormulario(req, 'list');
+            res.render("pokemons", { user, data, htmlMessage });
+        }
+    });
 });
 
 router.get('/editPokemon/:id', autenticacio, (req, res) => {
