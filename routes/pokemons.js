@@ -59,13 +59,19 @@ router.get('/create', autenticacio, (req, res) => {
 });
 
 router.get('/:id', autenticacio, (req, res) => {
-    const { user, htmlMessage } = cogerDatosFormulario(req, 'detail');
-
     const data = readData();
     const pokemon = data.pokemons.find(p => p.id === parseInt(req.params.id));
+
     if (!pokemon) return res.status(404).send('Pokemon not found');
 
-    res.render("pokemon", { user, pokemon, htmlMessage });
+    res.format({
+        json: () => res.json(pokemon),
+        
+        html: () => {
+            const { user, htmlMessage } = cogerDatosFormulario(req, 'detail');
+            res.render("pokemon", { user, pokemon, htmlMessage });
+        }
+    });
 });
 
 router.post('/createPokemon/', autenticacio, (req, res) => {
