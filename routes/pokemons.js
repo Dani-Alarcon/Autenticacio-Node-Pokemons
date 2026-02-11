@@ -75,23 +75,42 @@ router.get('/:id', autenticacio, (req, res) => {
 });
 
 router.post('/createPokemon/', autenticacio, (req, res) => {
-    const data = readData();
-    const { name, type, generation, imatge } = req.body; 
-    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png'
-    
-    if (!name || !type || !generation) return res.status(400).send('Falten camps obligatoris');
-    
-    const newPokemon = { 
-        id: data.pokemons.length + 1, 
-        name, 
-        type, 
-        generation,
-        imatge: imatge || imatgePerDefecte
-    };
-    
-    data.pokemons.push(newPokemon);
-    writeData(data);
-    res.redirect('/pokemons');
+    try {
+        const data = readData();
+        const { name, type, generation, imatge } = req.body; 
+        const imatgePerDefecte = 'https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg';
+        
+        if (!name || !type || !generation) {
+            return res.status(400).json({ error: 'Falten camps obligatoris' });
+        }
+
+        const lastId = data.pokemons.length > 0 ? data.pokemons[data.pokemons.length - 1].id : 0;
+        
+        const newPokemon = { 
+            id: lastId + 1, 
+            name, 
+            type, 
+            generation: parseInt(generation), 
+            imatge: (imatge && imatge.trim() !== '') ? imatge : imatgePerDefecte
+        };
+        
+        data.pokemons.push(newPokemon);
+        writeData(data);
+
+        
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            
+            return res.status(201).json(newPokemon);
+        } else {
+            
+            return res.redirect('/pokemons');
+        }
+
+    } catch (err) {
+        console.error("ERROR:", err);
+        
+        return res.status(500).json({ error: err.message });
+    }
 });
 
 router.put('/:id', autenticacio, (req, res) => {
@@ -112,18 +131,26 @@ router.put('/:id', autenticacio, (req, res) => {
 });
 
 router.delete('/:id', autenticacio, (req, res) => {
-    const data = readData();
-    const id = parseInt(req.params.id);
+    try {
+        const data = readData();
+        const id = parseInt(req.params.id);
+        const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
 
-    const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
+        if (pokemonIndex === -1) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
 
-    if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
+        data.pokemons.splice(pokemonIndex, 1);
+        writeData(data);
 
-
-    data.pokemons.splice(pokemonIndex, 1);
-    writeData(data);
-
-
-    res.redirect('/pokemons');
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.status(200).json({ message: 'Pokemon eliminat correctament' });
+        } else {
+            return res.redirect('/pokemons');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: err.message });
+    }
 });
 export default router;
