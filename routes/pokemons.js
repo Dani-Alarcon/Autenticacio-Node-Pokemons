@@ -114,20 +114,32 @@ router.post('/createPokemon/', autenticacio, (req, res) => {
 });
 
 router.put('/:id', autenticacio, (req, res) => {
-    const data = readData();
-    const id = parseInt(req.params.id);
-    const imatgePerDefecte = 'https://png.pngtree.com/png-vector/20240218/ourmid/pngtree-3d-realistrc-pokemon-ball-art-pic-png-image_11751536.png'
-    const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
-    const imatgeUsuari = req.body.imatge
+    try {
+        const data = readData();
+        const id = parseInt(req.params.id);
+        const imatgePerDefecte = 'https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg';
+        const pokemonIndex = data.pokemons.findIndex(p => p.id === id);
 
-    if (pokemonIndex === -1) return res.status(404).send('Pokemon not found');
+        if (pokemonIndex === -1) {
+            return res.status(404).json({ error: 'Pokemon not found' });
+        }
 
-    if(imatgeUsuari == ''){
-        req.body.imatge = imatgePerDefecte
+        if (req.body.imatge === '') {
+            req.body.imatge = imatgePerDefecte;
+        }
+
+        data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };
+        writeData(data);
+
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            return res.status(200).json(data.pokemons[pokemonIndex]);
+        } else {
+            return res.redirect('/pokemons');
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: err.message });
     }
-    data.pokemons[pokemonIndex] = { ...data.pokemons[pokemonIndex], ...req.body };//copia la informacion que hay en el formulario con req.body y la mete en la base de datos
-    writeData(data);
-    res.redirect('/pokemons');
 });
 
 router.delete('/:id', autenticacio, (req, res) => {
