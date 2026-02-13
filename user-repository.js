@@ -47,6 +47,6 @@ class Validation {
     }
     static password(password){
         if(typeof password != 'string') throw new Error('sdfjkl must be a string');
-        if(password.length < 6) throw new Error('password superior a 5 caracteres');
+        if(password.length < 3) throw new Error('password superior a 3 caracteres');
     }
 }

@@ -25,11 +25,20 @@ const cogerDatosFormulario = (req, messageType) => {
     return { user, htmlMessage };
 };
 const autenticacio = (req, res, next) => {
-    if (!req.session.user || !req.session.user.username) {
-        // Redirecciona a l'arrel, que segons server.js, porta a la vista 'login'
-        return res.redirect('/');
+   
+    const token = req.cookies.access_token;
+
+    if (!token) {
+        return res.status(401).json({ error: 'Cal iniciar sessió per accedir' });
     }
-    next();
+
+    try {
+       
+        next();
+    } catch (error) {
+        res.clearCookie("access_token");
+        return res.status(401).json({ error: 'Sessió caducada' });
+    }
 };
 
 router.get('/', autenticacio, (req, res) => {

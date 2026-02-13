@@ -47,45 +47,56 @@ app.get('/',(req,res)=>{
     const {user}=req.session
     res.render('login',user)
 });   
-app.post('/login', async (req,res)=>{
-    try{
-        const {username,password}=req.body
-        const user = await UserRepository.login({username,password})
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await UserRepository.login({ username, password });
         const token = jwt.sign(
-            {id: user._id, username: user.username},
-            SECRET_JWT_KEY, 
-            {
-            expiresIn:'1h'
-            })
+            { id: user._id, username: user.username },
+            SECRET_JWT_KEY,
+            { expiresIn: '1h' }
+        );
         res
-        .cookie('access_token',token,{
-            httpOnly:true, 
-            
-            secure: process.env.NODE_ENV==='production',
-            sameSite:'strict', 
-            maxAge:1000*60*60 
-        })
-        .send({ user,token })
-    }catch (error){
-        res.status(401).send(error.message)
+            .cookie('access_token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 1000 * 60 * 60
+            })
+            .send({ user, token });
+    } catch (error) {
+        res.status(401).send(error.message);
     }
 });
-app.post('/register', async (req,res)=>{
-    
-    const {username,password}=req.body
-    console.log(req.body)
-    try{
-        const id= await UserRepository.create({username,password});
-        res.send({id})
-    }catch(error){
-        res.status(400).send(error.message)
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const id = await UserRepository.create({ username, password });
+        
+        const token = jwt.sign(
+            { id: id, username: username },
+            SECRET_JWT_KEY,
+            { expiresIn: '1h' }
+        );
+
+        res
+            .cookie('access_token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict',
+                maxAge: 1000 * 60 * 60
+            })
+            .status(201).send({ id, username });
+    } catch (error) {
+        res.status(400).send(error.message);
     }
 });
-app.post('/logout',(req,res)=>{
+
+app.post('/logout', (req, res) => {
     res
-    .clearCookie('access_token')
-    .json({message:'logout successfull'})
-    .send('logout');
+        .clearCookie('access_token')
+        .json({ message: 'logout successfull' });
 });
 app.get('/protected2',(req,res)=>{
     const {user}=req.session
